@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slide");
+  if (slides.length > 0) {
+    slides[0].classList.add("active");
+  }
+});
+
+
 
   let goals = [];
 
