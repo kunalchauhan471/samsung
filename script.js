@@ -256,7 +256,7 @@ function getRandomColor() {
 }
 
 /* ==================== AI TASK GENERATION ==================== */
-function generateTasksWithAI(index) {
+window.generateTasksWithAI = function (index) {
   const goal = goals[index];
   const statusEl = document.getElementById(`aiStatus${index}`);
   const textarea = document.getElementById(`tasks${index}`);
