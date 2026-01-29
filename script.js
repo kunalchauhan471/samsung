@@ -261,10 +261,10 @@ async function generateTasksWithAI(index) {
   const statusEl = document.getElementById(`aiStatus${index}`);
   const textarea = document.getElementById(`tasks${index}`);
   
-  const goalNameLower = goal.name.toLowerCase();
+  const goalNameLower = goal.name.toLowerCase().trim();
   
-  // Check if goal is "health"
-  if (goalNameLower.includes('health')) {
+  // Check if goal is "health" (exact match or contains the word)
+  if (goalNameLower === "health" || goalNameLower.includes("health")) {
     statusEl.innerHTML = `
       <div class="ai-loading">
         <span class="spinner"></span>
@@ -284,12 +284,12 @@ async function generateTasksWithAI(index) {
       `;
       showNotification("AI generated health tasks successfully!", "success");
       setTimeout(() => statusEl.innerHTML = "", 3000);
-    }, 1000);
+    }, 800);
     return;
   }
   
-  // Check if goal is "academic"
-  if (goalNameLower.includes('academic')) {
+  // Check if goal is "academic" (exact match or contains the word)
+  if (goalNameLower === "academic" || goalNameLower.includes("academic")) {
     statusEl.innerHTML = `
       <div class="ai-loading">
         <span class="spinner"></span>
@@ -309,15 +309,15 @@ async function generateTasksWithAI(index) {
       `;
       showNotification("AI generated academic tasks successfully!", "success");
       setTimeout(() => statusEl.innerHTML = "", 3000);
-    }, 1000);
+    }, 800);
     return;
   }
   
-  // For any other goal, don't do anything and show error
+  // For any other goal, show error
   statusEl.innerHTML = `
     <div class="ai-error">
       <span>❌</span>
-      <span>AI generation is only available for "Health" or "Academic" goals.</span>
+      <span>AI generation is only available for "Health" or "Academic" goals. Add tasks manually for other goals.</span>
     </div>
   `;
   showNotification("AI generation only works for 'Health' or 'Academic' goals", "error");
@@ -650,6 +650,7 @@ function loadSavedPlan() {
     if (planData.mood) document.getElementById("mood").value = planData.mood;
     if (planData.focusTask) document.getElementById("focusTask").value = planData.focusTask;
     
+    renderGoals();
     showNotification("Previous plan loaded!", "success");
   } catch (error) {
     console.error("Failed to load plan:", error);
