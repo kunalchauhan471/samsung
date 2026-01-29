@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("Planner JS Loaded");
-
   let goals = [];
 
   const goalInput = document.getElementById("goalInput");
@@ -10,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const goalsDiv = document.getElementById("goals");
   const tasksArea = document.getElementById("tasksArea");
 
-  // 🔥 CORE FIXED ADD GOAL LOGIC
+  // ✅ FIXED ADD GOAL (NO RELOAD)
   addGoalBtn.addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -34,50 +32,44 @@ document.addEventListener("DOMContentLoaded", () => {
     goals.forEach(goal => {
       const div = document.createElement("div");
       div.className = "goal-chip";
-      div.textContent = goal.name;
       div.style.background = goal.color;
+      div.textContent = goal.name;
       goalsDiv.appendChild(div);
     });
   }
 
   function renderTasks() {
     tasksArea.innerHTML = "";
-
     goals.forEach((goal, index) => {
       const box = document.createElement("div");
       box.className = "task-box";
-
       box.innerHTML = `
         <h3>${goal.name}</h3>
         <textarea id="taskText${index}" placeholder="Tasks will appear here..."></textarea>
-        <button type="button" onclick="generateTasks(${index})">
-          🤖 Generate Tasks
-        </button>
+        <button type="button" onclick="generateTasks(${index})">🤖 Generate Tasks</button>
       `;
-
       tasksArea.appendChild(box);
     });
   }
 
-  // GLOBAL for inline onclick
-  window.generateTasks = function (index) {
+  window.generateTasks = function(index) {
     const goal = goals[index];
     const textarea = document.getElementById(`taskText${index}`);
 
-    textarea.value = "AI is thinking... ⏳";
+    textarea.value = "AI is thinking...";
 
     setTimeout(() => {
       let tasks = [];
-      const n = goal.name.toLowerCase();
+      const g = goal.name.toLowerCase();
 
-      if (n.includes("health")) {
+      if (g.includes("health")) {
         tasks = [
           "15-minute walk",
           "10-minute meditation",
           "Gym or home workout",
           "Stretching routine"
         ];
-      } else if (n.includes("academic")) {
+      } else if (g.includes("academic")) {
         tasks = [
           "Study one topic",
           "Solve practice questions",
