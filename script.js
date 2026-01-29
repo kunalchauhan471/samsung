@@ -48,32 +48,35 @@ function loginUser(){
 }
 
 /* ==================== GOALS ==================== */
-function addGoal(){
-  if(!goalInput.value.trim()) return;
-  goals.push({
-    id:Date.now(),
-    name:goalInput.value.trim(),
-    color:goalColor.value
+function addGoal() {
+  const input = document.getElementById("goalInput");
+  const color = document.getElementById("goalColor").value;
+  
+  if (!input.value.trim()) {
+    showNotification("Please enter a goal", "error");
+    return;
+  }
+  
+  goals.push({ 
+    id: Date.now(),
+    name: input.value.trim(), 
+    color,
+    createdAt: new Date().toISOString()
   });
-  goalInput.value="";
+  
+  input.value = "";
+  document.getElementById("goalColor").value = getRandomColor();
+  
   renderGoals();
+  showNotification("Goal added successfully!", "success");
 }
-function renderGoals(){
-  goalsDiv.innerHTML="";
-  tasksArea.innerHTML="";
-  goals.forEach((g,i)=>{
-    goalsDiv.innerHTML+=`
-      <div class="goal-box">
-        <b>${g.name}</b>
-      </div>`;
-    tasksArea.innerHTML+=`
-      <div class="goal-task-box">
-        <b>${g.name}</b>
-        <button onclick="generateTasksWithAI(${i})">✨ Generate Tasks with AI</button>
-        <div id="aiStatus${i}"></div>
-        <textarea id="tasks${i}" rows="5"></textarea>
-      </div>`;
-  });
+
+function deleteGoal(index) {
+  if (confirm(`Delete goal: "${goals[index].name}"?`)) {
+    goals.splice(index, 1);
+    renderGoals();
+    showNotification("Goal deleted", "info");
+  }
 }
 
 /* ==================== FAKE AI TASK GENERATION (KEY PART) ==================== */
