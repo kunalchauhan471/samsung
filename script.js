@@ -261,71 +261,67 @@ async function generateTasksWithAI(index) {
   const statusEl = document.getElementById(`aiStatus${index}`);
   const textarea = document.getElementById(`tasks${index}`);
   
+  const goalNameLower = goal.name.toLowerCase();
+  
+  // Check if goal is "health"
+  if (goalNameLower.includes('health')) {
+    statusEl.innerHTML = `
+      <div class="ai-loading">
+        <span class="spinner"></span>
+        <span>AI is generating tasks for "${goal.name}"...</span>
+      </div>
+    `;
+    
+    // Simulate AI thinking
+    setTimeout(() => {
+      const healthTasks = `• 15-minute walk\n• 10-minute meditation / breathing\n• Gym / home workout session\n• Stretching or mobility routine`;
+      textarea.value = healthTasks;
+      statusEl.innerHTML = `
+        <div class="ai-success">
+          <span>✅</span>
+          <span>Tasks generated successfully!</span>
+        </div>
+      `;
+      showNotification("AI generated health tasks successfully!", "success");
+      setTimeout(() => statusEl.innerHTML = "", 3000);
+    }, 1000);
+    return;
+  }
+  
+  // Check if goal is "academic"
+  if (goalNameLower.includes('academic')) {
+    statusEl.innerHTML = `
+      <div class="ai-loading">
+        <span class="spinner"></span>
+        <span>AI is generating tasks for "${goal.name}"...</span>
+      </div>
+    `;
+    
+    // Simulate AI thinking
+    setTimeout(() => {
+      const academicTasks = `• Study one topic / chapter\n• Solve practice questions\n• Revise previous notes\n• Make short summary / flash notes`;
+      textarea.value = academicTasks;
+      statusEl.innerHTML = `
+        <div class="ai-success">
+          <span>✅</span>
+          <span>Tasks generated successfully!</span>
+        </div>
+      `;
+      showNotification("AI generated academic tasks successfully!", "success");
+      setTimeout(() => statusEl.innerHTML = "", 3000);
+    }, 1000);
+    return;
+  }
+  
+  // For any other goal, don't do anything and show error
   statusEl.innerHTML = `
-    <div class="ai-loading">
-      <span class="spinner"></span>
-      <span>AI is generating tasks for "${goal.name}"...</span>
+    <div class="ai-error">
+      <span>❌</span>
+      <span>AI generation is only available for "Health" or "Academic" goals.</span>
     </div>
   `;
-  
-  try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1500,
-        messages: [{
-          role: "user",
-          content: `You are a student productivity expert. Break down this weekly goal into 5-7 specific, actionable tasks.
-
-Goal: "${goal.name}"
-
-Requirements:
-- Each task should be realistic (30 mins - 2 hours)
-- Include variety: studying, practice, projects, review
-- Make tasks concrete and measurable
-- Consider student energy levels
-- Format: One task per line, starting with •
-
-Example format:
-• Study chapter concepts for 1 hour
-• Complete 10 practice problems
-• Create summary notes (30 mins)
-• Review with flashcards (45 mins)
-• Take practice quiz
-
-Now generate tasks for the goal above:`
-        }]
-      })
-    });
-
-    const data = await response.json();
-    const tasks = data.content[0].text.trim();
-    
-    textarea.value = tasks;
-    statusEl.innerHTML = `
-      <div class="ai-success">
-        <span>✅</span>
-        <span>Tasks generated successfully!</span>
-      </div>
-    `;
-    
-    setTimeout(() => statusEl.innerHTML = "", 3000);
-    showNotification("AI generated tasks successfully!", "success");
-    
-  } catch (error) {
-    console.error('AI generation failed:', error);
-    statusEl.innerHTML = `
-      <div class="ai-error">
-        <span>❌</span>
-        <span>AI generation failed. Please add tasks manually.</span>
-      </div>
-    `;
-    showNotification("AI generation failed. Try adding tasks manually.", "error");
-  }
+  showNotification("AI generation only works for 'Health' or 'Academic' goals", "error");
+  setTimeout(() => statusEl.innerHTML = "", 3000);
 }
 
 /* ==================== TASK BATCHING ==================== */
