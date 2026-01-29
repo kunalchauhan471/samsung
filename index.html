@@ -4,36 +4,46 @@
 <meta charset="UTF-8">
 <title>AI Weekly Focus Planner - Student Edition</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI-powered weekly task planner for students with smart scheduling and workload management">
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 <div class="container">
 
+  <!-- HEADER -->
   <div class="header">
     <h1>✨ AI Focus Planner</h1>
     <p class="subtitle">Smart weekly planning for students</p>
+    <div id="userProfile" style="display:none" class="user-profile">
+      <span id="userNameDisplay"></span>
+      <button id="logoutBtn" class="btn-logout" type="button">Logout</button>
+    </div>
   </div>
 
+  <!-- PROGRESS BAR -->
+  <div class="progress"><div id="bar" class="progress-bar"></div></div>
+
   <!-- SLIDE 2: GOALS -->
-  <div class="slide active card" id="goalSlide">
+  <div class="slide card">
     <h2>🎯 Define Your Weekly Goals</h2>
 
     <div class="goal-input-section">
       <div class="input-row">
         <div class="input-group flex-grow">
           <label>Goal Name</label>
-          <input id="goalInput" placeholder="e.g., Health or Academics">
+          <input id="goalInput" placeholder="e.g., Master Physics Chapter 5">
         </div>
         <div class="input-group">
-          <label>Color</label>
+          <label>Goal Color</label>
           <input type="color" id="goalColor" value="#4CAF50">
         </div>
       </div>
 
-      <!-- 🔥 FIX 1 -->
-      <button id="addGoalBtn" type="button" class="primary btn-large">
-        ➕ Add Goal
+      <!-- 🔥 ONLY FIX HERE -->
+      <button id="addGoalBtn" class="primary btn-large" type="button">
+        <span class="btn-icon">➕</span>
+        Add Goal
       </button>
     </div>
 
@@ -43,15 +53,11 @@
   <!-- SLIDE 3: TASKS -->
   <div class="slide card">
     <h2>📝 Break Down Your Goals</h2>
-    <div id="tasksArea"></div>
+    <div id="tasksArea" class="tasks-container"></div>
   </div>
 
 </div>
 
-<!-- Puter AI (optional later) -->
-<script src="https://js.puter.com/v2/"></script>
-
-<!-- MAIN SCRIPT -->
 <script src="script.js"></script>
 </body>
 </html>
