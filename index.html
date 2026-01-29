@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>AI Focus Planner</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>AI Weekly Focus Planner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+    }
+    .card {
+      background: #1e1e1e;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      border-radius: 10px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    button {
+      cursor: pointer;
+      background: #4CAF50;
+      border: none;
+      color: white;
+      font-weight: bold;
+    }
+    .goal {
+      padding: 8px;
+      margin-top: 6px;
+      border-radius: 6px;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="card">
+  <h2>Add Goal (FINAL TEST)</h2>
 
-  <!-- ❗ NO FORM TAG HERE -->
-  <div class="card">
-    <h2>Add Goal</h2>
+  <!-- ❌ NO FORM TAG ANYWHERE -->
+  <input id="goalInput" placeholder="Type goal like Health or Academics">
+  <input type="color" id="goalColor" value="#4CAF50">
 
-    <input id="goalInput" placeholder="Health or Academics">
-    <input type="color" id="goalColor" value="#4CAF50">
+  <!-- 🔥 type=button is mandatory -->
+  <button id="addGoalBtn" type="button">➕ Add Goal</button>
 
-    <!-- 🔥 TYPE FIX -->
-    <button id="addGoalBtn" type="button">➕ Add Goal</button>
-
-    <div id="goals"></div>
-  </div>
-
+  <div id="goals"></div>
 </div>
 
-<!-- 🔥 SCRIPT MUST BE AT BOTTOM -->
+<!-- JS MUST BE LAST -->
 <script src="script.js"></script>
 </body>
 </html>
