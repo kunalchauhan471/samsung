@@ -741,7 +741,11 @@ document.getElementById("goalInput").addEventListener("keypress", (e) => {
 
 document.getElementById("next1").addEventListener("click", next);
 document.getElementById("back1").addEventListener("click", back);
-document.getElementById("next2").addEventListener("click", next);
+document.getElementById("next2").addEventListener("click", () => {
+  next();
+  renderGoals();
+});
+
 document.getElementById("back2").addEventListener("click", back);
 document.getElementById("next3").addEventListener("click", prepareBatch);
 document.getElementById("back3").addEventListener("click", back);
