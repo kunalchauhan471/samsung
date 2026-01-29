@@ -256,24 +256,24 @@ function getRandomColor() {
 }
 
 /* ==================== AI TASK GENERATION ==================== */
-async function generateTasksWithAI(index) {
+function generateTasksWithAI(index) {
   const goal = goals[index];
   const statusEl = document.getElementById(`aiStatus${index}`);
   const textarea = document.getElementById(`tasks${index}`);
   
-  const goalNameLower = goal.name.toLowerCase().trim();
+  const goalName = goal.name.toLowerCase();
   
-  // Check if goal is "health" (exact match or contains the word)
-  if (goalNameLower === "health" || goalNameLower.includes("health")) {
-    statusEl.innerHTML = `
-      <div class="ai-loading">
-        <span class="spinner"></span>
-        <span>AI is generating tasks for "${goal.name}"...</span>
-      </div>
-    `;
-    
-    // Simulate AI thinking
-    setTimeout(() => {
+  // Show loading immediately
+  statusEl.innerHTML = `
+    <div class="ai-loading">
+      <span class="spinner"></span>
+      <span>AI is generating tasks for "${goal.name}"...</span>
+    </div>
+  `;
+  
+  // Check after a short delay
+  setTimeout(() => {
+    if (goalName.includes('health')) {
       const healthTasks = `• 15-minute walk\n• 10-minute meditation / breathing\n• Gym / home workout session\n• Stretching or mobility routine`;
       textarea.value = healthTasks;
       statusEl.innerHTML = `
@@ -283,22 +283,8 @@ async function generateTasksWithAI(index) {
         </div>
       `;
       showNotification("AI generated health tasks successfully!", "success");
-      setTimeout(() => statusEl.innerHTML = "", 3000);
-    }, 800);
-    return;
-  }
-  
-  // Check if goal is "academic" (exact match or contains the word)
-  if (goalNameLower === "academic" || goalNameLower.includes("academic")) {
-    statusEl.innerHTML = `
-      <div class="ai-loading">
-        <span class="spinner"></span>
-        <span>AI is generating tasks for "${goal.name}"...</span>
-      </div>
-    `;
-    
-    // Simulate AI thinking
-    setTimeout(() => {
+    } 
+    else if (goalName.includes('academic')) {
       const academicTasks = `• Study one topic / chapter\n• Solve practice questions\n• Revise previous notes\n• Make short summary / flash notes`;
       textarea.value = academicTasks;
       statusEl.innerHTML = `
@@ -308,20 +294,19 @@ async function generateTasksWithAI(index) {
         </div>
       `;
       showNotification("AI generated academic tasks successfully!", "success");
-      setTimeout(() => statusEl.innerHTML = "", 3000);
-    }, 800);
-    return;
-  }
-  
-  // For any other goal, show error
-  statusEl.innerHTML = `
-    <div class="ai-error">
-      <span>❌</span>
-      <span>AI generation is only available for "Health" or "Academic" goals. Add tasks manually for other goals.</span>
-    </div>
-  `;
-  showNotification("AI generation only works for 'Health' or 'Academic' goals", "error");
-  setTimeout(() => statusEl.innerHTML = "", 3000);
+    }
+    else {
+      statusEl.innerHTML = `
+        <div class="ai-error">
+          <span>❌</span>
+          <span>AI generation is only available for "Health" or "Academic" goals.</span>
+        </div>
+      `;
+      showNotification("AI generation only works for 'Health' or 'Academic' goals", "error");
+    }
+    
+    setTimeout(() => statusEl.innerHTML = "", 3000);
+  }, 500);
 }
 
 /* ==================== TASK BATCHING ==================== */
