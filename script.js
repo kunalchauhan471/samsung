@@ -229,15 +229,11 @@ function renderGoals() {
       <div id="aiStatus${i}" class="ai-status"></div>
       
       <textarea 
-        id="tasks${i}" 
-        placeholder="Add tasks manually (one per line):
-• Study concepts for 1 hour
-• Complete practice exercises
-• Review and take notes
-        
-Or click 'Generate with AI' above!"
-        rows="5"
-      ></textarea>
+  id="tasks${i}" 
+  rows="5"
+  placeholder="Add tasks manually (one per line)"
+></textarea>
+
       
       <div class="task-tips">
         💡 Tip: Be specific about duration and action (e.g., "Study for 30 mins" not just "Study")
