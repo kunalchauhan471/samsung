@@ -1108,3 +1108,6 @@ button:active {
     page-break-inside: avoid;
   }
 }
+.slide { display: none; }
+.slide.active { display: block; }
+
