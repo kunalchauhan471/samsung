@@ -1,60 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Weekly Focus Planner</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      padding: 20px;
-    }
-    .card {
-      background: #1e1e1e;
-      padding: 20px;
-      max-width: 500px;
-      margin: auto;
-      border-radius: 10px;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      font-size: 16px;
-    }
-    button {
-      cursor: pointer;
-      background: #4CAF50;
-      border: none;
-      color: white;
-      font-weight: bold;
-    }
-    .goal {
-      padding: 8px;
-      margin-top: 6px;
-      border-radius: 6px;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>AI Weekly Focus Planner - Student Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+<div class="container">
 
-<div class="card">
-  <h2>Add Goal (FINAL TEST)</h2>
+  <div class="header">
+    <h1>✨ AI Focus Planner</h1>
+    <p class="subtitle">Smart weekly planning for students</p>
+  </div>
 
-  <!-- ❌ NO FORM TAG ANYWHERE -->
-  <input id="goalInput" placeholder="Type goal like Health or Academics">
-  <input type="color" id="goalColor" value="#4CAF50">
+  <!-- SLIDE 2: GOALS -->
+  <div class="slide active card" id="goalSlide">
+    <h2>🎯 Define Your Weekly Goals</h2>
 
-  <!-- 🔥 type=button is mandatory -->
-  <button id="addGoalBtn" type="button">➕ Add Goal</button>
+    <div class="goal-input-section">
+      <div class="input-row">
+        <div class="input-group flex-grow">
+          <label>Goal Name</label>
+          <input id="goalInput" placeholder="e.g., Health or Academics">
+        </div>
+        <div class="input-group">
+          <label>Color</label>
+          <input type="color" id="goalColor" value="#4CAF50">
+        </div>
+      </div>
 
-  <div id="goals"></div>
+      <!-- 🔥 FIX 1 -->
+      <button id="addGoalBtn" type="button" class="primary btn-large">
+        ➕ Add Goal
+      </button>
+    </div>
+
+    <div id="goals" class="goals-container"></div>
+  </div>
+
+  <!-- SLIDE 3: TASKS -->
+  <div class="slide card">
+    <h2>📝 Break Down Your Goals</h2>
+    <div id="tasksArea"></div>
+  </div>
+
 </div>
 
-<!-- JS MUST BE LAST -->
+<!-- Puter AI (optional later) -->
+<script src="https://js.puter.com/v2/"></script>
+
+<!-- MAIN SCRIPT -->
 <script src="script.js"></script>
 </body>
 </html>
